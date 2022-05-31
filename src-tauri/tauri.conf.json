@@ -8,11 +8,11 @@
   },
   "package": {
     "productName": "mcctools",
-    "version": "0.1.0"
+    "version": "../package.json"
   },
   "tauri": {
     "allowlist": {
-      "all": true
+      "all": false
     },
     "bundle": {
       "active": true,
@@ -29,7 +29,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "io.github.mcctools",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -39,7 +39,7 @@
         "signingIdentity": null
       },
       "resources": [],
-      "shortDescription": "",
+      "shortDescription": "A collection of GUI tools to ease the development of MC datapacks and resource packs",
       "targets": "all",
       "windows": {
         "certificateThumbprint": null,
