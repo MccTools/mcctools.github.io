@@ -3,6 +3,22 @@
 	import '../app.css';
 </script>
 
+<script lang="ts" context="module">
+	import { CompleteVersions } from '$lib/mcmeta/summary';
+	import type { Load } from '@sveltejs/kit';
+
+	export const load: Load = async ({fetch, stuff}) => {
+		const versionsResponse = await fetch("/version_list.json");
+		const versions = CompleteVersions(await versionsResponse.json());
+
+		return {
+			stuff: {
+				versions
+			}
+		};
+	}
+</script>
+
 <Header />
 
 <main>
