@@ -1,0 +1,1 @@
+export const site: string = import.meta.env.VITE_SITE; //__SITE__

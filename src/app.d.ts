@@ -11,5 +11,9 @@ declare namespace App {
 
 	// interface Session {}
 
-	// interface Stuff {}
+	interface Stuff {
+		versions: import("$lib/mcmeta/summary").Version[]
+	}
 }
+
+declare const __SITE__: string;

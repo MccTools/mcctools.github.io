@@ -59,7 +59,8 @@
         "height": 600,
         "resizable": true,
         "title": "Mcc Tools",
-        "width": 800
+        "width": 800,
+        "url": "site/index.html"
       }
     ]
   }

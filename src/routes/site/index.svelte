@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Counter from '$lib/Counter.svelte';
+	import { mode } from '$app/env';
 </script>
 
 <svelte:head>
@@ -11,12 +12,12 @@
 	<h1>
 		<div class="welcome">
 			<picture>
-				<source srcset="svelte-welcome.webp" type="image/webp" />
-				<img src="svelte-welcome.png" alt="Welcome" />
+				<source srcset="/svelte-welcome.webp" type="image/webp" />
+				<img src="/svelte-welcome.png" alt="Welcome" />
 			</picture>
 		</div>
 
-		to your new<br />SvelteKit app
+		to your new<br />SvelteKit app<br/>Running in mode {mode}
 	</h1>
 
 	<h2>

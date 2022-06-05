@@ -1,13 +1,5 @@
-<script lang="ts" context="module">
-    import type { Version } from "$lib/mcmeta/summary";
-    import type { Load } from "@sveltejs/kit";
-
-    let versions: Version[];
-
-    export const load: Load = ({ stuff }) => {
-        versions = (stuff as any).versions;
-        return {};
-    }
+<script lang="ts">
+	import { page } from "$app/stores";
 </script>
 
 <svelte:head>
@@ -17,12 +9,11 @@
 
 <div class="content">
 	<h1>Versions</h1>
-
-    <ul>
-	{#each versions as version (version.id)}
+	<ul>
+	{#each $page.stuff.versions as version (version.id)}
 		<li>{version.name}</li>
 	{/each}
-    </ul>
+	</ul>
 </div>
 
 <style>

@@ -2,6 +2,7 @@
 	import { enhance } from '$lib/form';
 	import { scale } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
+	import { site } from '$lib/globals';
 
 	type Todo = {
 		uid: string;
@@ -24,7 +25,7 @@
 
 	<form
 		class="new"
-		action="/todos"
+		action="{site}/todos"
 		method="post"
 		use:enhance={{
 			result: async ({ form }) => {
@@ -43,7 +44,7 @@
 			animate:flip={{ duration: 200 }}
 		>
 			<form
-				action="/todos?_method=PATCH"
+				action="{site}/todos?_method=PATCH"
 				method="post"
 				use:enhance={{
 					pending: ({ data }) => {
@@ -56,14 +57,14 @@
 				<button class="toggle" aria-label="Mark todo as {todo.done ? 'not done' : 'done'}" />
 			</form>
 
-			<form class="text" action="/todos?_method=PATCH" method="post" use:enhance>
+			<form class="text" action="{site}/todos?_method=PATCH" method="post" use:enhance>
 				<input type="hidden" name="uid" value={todo.uid} />
 				<input aria-label="Edit todo" type="text" name="text" value={todo.text} />
 				<button class="save" aria-label="Save todo" />
 			</form>
 
 			<form
-				action="/todos?_method=DELETE"
+				action="{site}/todos?_method=DELETE"
 				method="post"
 				use:enhance={{
 					pending: () => (todo.pending_delete = true)

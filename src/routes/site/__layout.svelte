@@ -1,14 +1,16 @@
 <script lang="ts">
 	import Header from '$lib/header/Header.svelte';
-	import '../app.css';
+	import '$root/app.css';
 </script>
 
 <script lang="ts" context="module">
+	import { site } from '$lib/globals';
 	import { CompleteVersions } from '$lib/mcmeta/summary';
-	import type { Load } from '@sveltejs/kit';
+	import type { Load } from './__types/__layout';
 
-	export const load: Load = async ({fetch, stuff}) => {
-		const versionsResponse = await fetch("/version_list.json");
+	export const load: Load = async ({fetch}) => {
+		console.log(`${import.meta.env.MODE}: ${site}`);
+		const versionsResponse = await fetch(`${site}/version_list.json`);
 		const versions = CompleteVersions(await versionsResponse.json());
 
 		return {
