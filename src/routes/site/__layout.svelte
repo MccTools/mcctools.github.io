@@ -9,7 +9,6 @@
 	import type { Load } from './__types/__layout';
 
 	export const load: Load = async ({fetch}) => {
-		console.log(`${import.meta.env.MODE}: ${site}`);
 		const versionsResponse = await fetch(`${site}/version_list.json`);
 		const versions = CompleteVersions(await versionsResponse.json());
 
