@@ -58,7 +58,7 @@ jobs:
           releaseBody: '${{ steps.changelog.outputs.content }}'
           releaseDraft: true
           prerelease: false
-          tauriScript: "npm run build-tauri"
+          #tauriScript: "npm run build-tauri"
       
       #- name: Tag commit
         #uses: rickstaa/action-create-tag@v1
