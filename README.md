@@ -1,38 +1,15 @@
-# create-svelte
+# MCC Tools
+A collection of GUI tools to ease the development of MC datapacks and resource packs.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+These tools are available both as a web app at [mcctools.github.io](https://mcctools.github.io/), and as a dedicated desktop app available in the [releases](https://github.com/MccTools/mcctools.github.io/releases).
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm init svelte
-
-# create a new project in my-app
-npm init svelte my-app
-```
+The desktop app is more fully featured than the web app, thanks to [Tauri](https://tauri.studio/) making it possible to interface more natively with the desktop environment.
 
 ## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+First install dependencies with `npm install`, then use `npm run dev-tauri` to test the desktop app, or use `npm run dev-ghpages` and open `https://localhost:3000` in your browser to test the browser version.
 
 ## Building
+Build the desktop app using `npm run build-tauri`, or build the web app using `npm run build-ghpages`
 
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Releasing
+> TODO: The exact method of generating a release is yet to be determined
