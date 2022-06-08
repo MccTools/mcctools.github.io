@@ -35,6 +35,10 @@ const config = {
 
 		vite: {
 			mode: process.env.MY_MODE,
+			server: {
+				port: 3000,
+				strictPort: true,
+			},
 		},
 	},
 };
