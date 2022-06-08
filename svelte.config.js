@@ -39,6 +39,7 @@ const config = {
 				port: 3000,
 				strictPort: true,
 			},
+			envPrefix: ["VITE_","TAURI_"],
 		},
 	},
 };
