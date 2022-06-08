@@ -2,6 +2,7 @@ import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
 
 const isGhPages = process.env.MY_MODE == "ghpages";
+console.log(process.env.MY_MODE);
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {

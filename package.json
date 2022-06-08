@@ -4,8 +4,8 @@
 	"scripts": {
 		"dev-tauri": "cross-env MY_MODE=tauri npm run tauri dev",
 		"build-tauri": "cross-env MY_MODE=tauri npm run tauri build",
-		"dev": "dev-tauri",
-		"build": "build-tauri",
+		"dev": "cross-env MY_MODE=tauri npm run tauri dev",
+		"build": "cross-env MY_MODE=tauri npm run tauri build",
 		"dev-ghpages": "cross-env MY_MODE=ghpages npm run svelte-kit dev",
 		"build-ghpages": "cross-env MY_MODE=ghpages npm run svelte-kit build",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
