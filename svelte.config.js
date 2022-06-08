@@ -33,8 +33,6 @@ const config = {
 			entries: ["*"]
 		},
 
-		trailingSlash: "always",
-
 		vite: {
 			mode: process.env.MY_MODE,
 		},
