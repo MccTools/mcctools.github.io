@@ -94,6 +94,7 @@ jobs:
           #tag: "v${{ steps.version.outputs.current-version }}"
   generate-update:
     needs: build-tauri
+    runs-on: ubuntu-latest
     steps:
       - name: Get assets
         uses: actions/github-script@v6
