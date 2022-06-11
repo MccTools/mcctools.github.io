@@ -104,7 +104,7 @@ jobs:
           script: |
             const { releaseId } = process.env;
 
-            var response = octokit.rest.repos.listReleaseAssets({
+            var response = github.rest.repos.listReleaseAssets({
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: releaseId,
