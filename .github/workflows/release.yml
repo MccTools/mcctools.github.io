@@ -61,7 +61,7 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-          
+      
       - uses: Swatinem/rust-cache@v1
           
       - name: Install dependencies (ubuntu only)
@@ -106,10 +106,10 @@ jobs:
           script: |
             const { releaseId } = process.env;
 
-            var response = github.rest.repos.listReleaseAssets({
+            var response = await github.rest.repos.listReleaseAssets({
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: releaseId,
             });
 
-            console.log(JSON.stringify(response));
+            console.log(response);
