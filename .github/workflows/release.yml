@@ -8,12 +8,39 @@ on:
   workflow_dispatch:
 
 jobs:
+  build-ghpages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Node.js setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      
+      - name: Install app dependencies
+        run: npm install
+        
+      - name: Build the site
+        run: npm run build-ghpages
+      
+      - name: Push to ghpages branch
+        uses: s0/git-publish-subdir-action@v2.5.1
+        env:
+          REPO: self
+          BRANCH: gh-pages
+          FOLDER: build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   build-tauri:
     strategy:
       fail-fast: false
       matrix:
         platform: [macos-latest, ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.platform }}
+    outputs:
+      releaseId: ${{ steps.tauri.outputs.releaseId }}
 
     steps:
       - name: Checkout repository
@@ -49,6 +76,7 @@ jobs:
       #  uses: martinbeentjes/npm-get-version-action@main
       
       - name: Build the app
+        id: tauri
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -59,32 +87,26 @@ jobs:
           releaseDraft: true
           prerelease: false
           tauriScript: "npm run"
-      
+
       #- name: Tag commit
         #uses: rickstaa/action-create-tag@v1
         #with:
           #tag: "v${{ steps.version.outputs.current-version }}"
-  build-ghpages:
-    runs-on: ubuntu-latest
+  generate-update:
+    needs: build-tauri
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      
-      - name: Node.js setup
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16
-      
-      - name: Install app dependencies
-        run: npm install
-        
-      - name: Build the site
-        run: npm run build-ghpages
-      
-      - name: Push to ghpages branch
-        uses: s0/git-publish-subdir-action@v2.5.1
+      - name: Get assets
+        uses: actions/github-script@v6
         env:
-          REPO: self
-          BRANCH: gh-pages
-          FOLDER: build
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          releaseId: ${{ needs.build-tauri.outputs.releaseId }}
+        with:
+          script: |
+            const { releaseId } = process.env;
+
+            var response = octokit.rest.repos.listReleaseAssets({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: releaseId,
+            });
+
+            console.log(JSON.stringify(response));
