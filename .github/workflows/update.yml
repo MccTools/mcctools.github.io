@@ -52,8 +52,6 @@ jobs:
               return;
             }
 
-            core.info(JSON.stringify(assets));
-
             let update = {
               "name": version,
               "notes": changelog,
@@ -93,15 +91,6 @@ jobs:
                 repo: context.repo.repo,
                 asset_id: sigAsset.id,
               });
-              //const sigResponse = await github.rest.repos.getReleaseAsset({
-              //  headers: {
-              //    Accept: "application/octet-stream",
-              //  },
-              //  owner: context.repo.owner,
-              //  repo: context.repo.repo,
-              //  asset_id: sigAsset.id,
-              //});
-              core.info(`Sig response: ${JSON.stringify(sigResponse)}`);
 
               const sig = decoder.decode(sigResponse.data);
               core.info(`Sig: ${sig}`);
@@ -115,23 +104,19 @@ jobs:
               const targz = ".tar.gz";
               if (name.endsWith(targz))
               {
-                core.info("tar.gz");
                 if (name.endsWith(".AppImage", name.length - targz.length))
                 {
-                  core.info("linux");
                   update.platforms["linux-x86_64"] = platform;
                 }
                 else
                 {
-                  core.info("mac");
                   update.platforms["darwin-intel"] = platform;
                 }
               }
               else if (name.endsWith(".msi.zip"))
               {
-                core.info("windows");
                 update.platforms["windows-x86_64"] = platform;
               }
             }
 
-            core.info(JSON.stringify(update));
+            core.setOutput("update-json", JSON.stringify(update));
