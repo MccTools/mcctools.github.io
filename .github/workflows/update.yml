@@ -80,7 +80,7 @@ jobs:
               const sigAsset = assets.find(elem => elem.name === sigName);
               if (!sigAsset)
               {
-                core.info(`No sig file with name {sigName}`)
+                core.info(`No sig file with name ${sigName}`)
                 continue;
               }
               const sigResponse = await github.rest.repos.getReleaseAsset({
@@ -106,7 +106,7 @@ jobs:
               if (name.endsWith(targz))
               {
                 core.info("tar.gz");
-                if (name.endsWith(".AppImage", name.lenth - targz.length))
+                if (name.endsWith(".AppImage", name.length - targz.length))
                 {
                   core.info("linux");
                   update.platforms["linux-x86_64"] = platform;
@@ -117,7 +117,7 @@ jobs:
                   update.platforms["darwin-intel"] = platform;
                 }
               }
-              else if (name.endsWith(".msi"))
+              else if (name.endsWith(".msi.zip"))
               {
                 core.info("windows");
                 update.platforms["windows-x86_64"] = platform;
