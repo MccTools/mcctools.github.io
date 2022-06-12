@@ -144,7 +144,7 @@ jobs:
             const update_file = "update.json";
             if (!fs.existsSync(update_file))
             {
-              core.log("No old updates to archive");
+              core.info("No old updates to archive");
               return;
             }
 
@@ -165,6 +165,7 @@ jobs:
             let versions = old_versions_contents.versions;
             if (versions.length > 10)
             {
+              core.info("Creating new page in the archive");
               const folder = "archive";
               if (!fs.existsSync(folder)) {
                 fs.mkdirSync(folder);
