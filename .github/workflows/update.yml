@@ -51,6 +51,9 @@ jobs:
               return;
             }
 
+            core.info(JSON.stringify(assets));
+            return;
+
             let update = {
               "name": version,
               "notes": changelog,
