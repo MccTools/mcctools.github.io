@@ -1,1 +1,1 @@
-Setup initial proof-of-concept
+Setup updater
