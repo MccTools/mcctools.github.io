@@ -154,7 +154,7 @@ jobs:
               {
                 continue;
               }
-              const sig = await github.request(sig_asset.browser_download_url);
+              const sig = await github.request(sigAsset.browser_download_url);
 
               let platform = {
                 signature: sig,
