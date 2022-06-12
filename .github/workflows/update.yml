@@ -98,4 +98,4 @@ jobs:
               }
             }
 
-            core.info(update);
+            core.info(JSON.stringify(update));
