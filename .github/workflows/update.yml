@@ -35,6 +35,7 @@ jobs:
           releaseId: ${{ steps.get_release.outputs.id }}
         with:
           script: |
+            const { TextDecoder } = require('node:util');
             const { version, changelog, releaseId } = process.env;
 
             let response = await github.rest.repos.listReleaseAssets({
@@ -60,6 +61,7 @@ jobs:
               "platforms": {}
             };
 
+            const decoder = new TextDecoder();
             for (const asset of assets)
             {
               const name = asset.name;
@@ -101,7 +103,7 @@ jobs:
               //});
               core.info(`Sig response: ${JSON.stringify(sigResponse)}`);
 
-              const sig = JSON.stringify(sigResponse.data);
+              const sig = decoder.decoder(sigResponse.data);
               core.info(`Sig: ${sig}`);
 
               let platform = {
