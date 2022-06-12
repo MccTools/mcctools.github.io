@@ -52,7 +52,6 @@ jobs:
             }
 
             core.info(JSON.stringify(assets));
-            return;
 
             let update = {
               "name": version,
@@ -64,18 +63,38 @@ jobs:
             for (const asset of assets)
             {
               const name = asset.name;
-              if ((typeof name !== "string" && !(name instanceof String)) || name.endsWith(".sig"))
+              core.info(`Checking asset ${name}`)
+              if ((typeof name !== "string" && !(name instanceof String)))
               {
+                core.info(`Name not a string`)
+                continue;
+              }
+
+              if (name.endsWith(".sig"))
+              {
+                core.info("Sig file");
                 continue;
               }
 
               const sigName = asset.name + ".sig";
-              const sigAsset = assets.find(elem => elem.name == sigName);
+              const sigAsset = assets.find(elem => elem.name === sigName);
               if (!sigAsset)
               {
+                core.info(`No sig file with name {sigName}`)
                 continue;
               }
-              const sig = await github.request(sigAsset.browser_download_url);
+              const sigResponse = await githuboctokit.rest.repos.getReleaseAsset({
+                headers: {
+                  Accept: "application/octet-stream",
+                },
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                asset_id: sigAsset.id,
+              });
+              core.info(`Sig response: ${JSON.stringify(sigResponse)}`);
+
+              const sig = JSON.stringify(sigResponse.data);
+              core.info(`Sig: ${sig}`);
 
               let platform = {
                 signature: sig,
@@ -84,19 +103,23 @@ jobs:
 
               // TODO: Support more platforms
               const targz = ".tar.gz";
-              if (asset.name.endsWith(targz))
+              if (name.endsWith(targz))
               {
-                if (asset.name.endsWith(".AppImage", asset.name.lenth - targz.length))
+                core.info("tar.gz");
+                if (name.endsWith(".AppImage", name.lenth - targz.length))
                 {
+                  core.info("linux");
                   update.platforms["linux-x86_64"] = platform;
                 }
                 else
                 {
+                  core.info("mac");
                   update.platforms["darwin-intel"] = platform;
                 }
               }
-              else if (asset.name.endsWith(".msi"))
+              else if (name.endsWith(".msi"))
               {
+                core.info("windows");
                 update.platforms["windows-x86_64"] = platform;
               }
             }
