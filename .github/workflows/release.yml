@@ -92,92 +92,13 @@ jobs:
         #uses: rickstaa/action-create-tag@v1
         #with:
           #tag: "v${{ steps.version.outputs.current-version }}"
-  generate-update:
+  publish:
     needs: build-tauri
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Get version
-        id: version
-        uses: martinbeentjes/npm-get-version-action@main
-      
-      - name: Read changelog
-        id: changelog
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: ./changelog.md
-
-      - name: Get assets
-        uses: actions/github-script@v6
+      - name: Publish release
+        uses: eregon/publish-release@v1
         env:
-          releaseId: ${{ needs.build-tauri.outputs.releaseId }}
-          version: ${{ steps.version.outputs.current-version }}
-          changelog: ${{ steps.changelog.outputs.content }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          script: |
-            const { releaseId, version, changelog } = process.env;
-            
-            let response = await github.rest.repos.listReleaseAssets({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              release_id: releaseId,
-            });
-
-            let assets = response.data;
-
-            if (!assets || assets.length === 0)
-            {
-              core.setFailed("No assets available in response");
-              return;
-            }
-
-            let update = {
-              "name": version,
-              "notes": changelog,
-              "pub_date": assets[0].updated_at,
-              "platforms": {}
-            };
-
-            for (const asset of assets)
-            {
-              const name = asset.name;
-              if ((typeof name !== "string" && !(name instanceof String)) || name.endsWith(".sig"))
-              {
-                continue;
-              }
-
-              const sigName = asset.name + ".sig";
-              const sigAsset = assets.find(elem => elem.name == sigName);
-              if (!sigAsset)
-              {
-                continue;
-              }
-              const sig = await github.request(sigAsset.browser_download_url);
-
-              let platform = {
-                signature: sig,
-                url: asset.browser_download_url
-              };
-
-              // TODO: Support more platforms
-              const targz = ".tar.gz";
-              if (asset.name.endsWith(targz))
-              {
-                if (asset.name.endsWith(".AppImage", asset.name.lenth - targz.length))
-                {
-                  update.platforms["linux-x86_64"] = platform;
-                }
-                else
-                {
-                  update.platforms["darwin-intel"] = platform;
-                }
-              }
-              else if (asset.name.endsWith(".msi"))
-              {
-                update.platforms["windows-x86_64"] = platform;
-              }
-            }
-
-            core.info(update);
+          release_id: ${{ needs.build-tauri.outputs.releaseId }}
