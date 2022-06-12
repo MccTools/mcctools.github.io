@@ -181,7 +181,7 @@ jobs:
             fs.writeFileSync(update_file, JSON.stringify(old_versions_contents));
 
       - name: Modify updater file
-        uses: DamianReeves/write-file-action
+        uses: DamianReeves/write-file-action@v1.0
         with:
           path: update.json
           contents: ${{ needs.generate-update.outputs.update-json }}
