@@ -7,6 +7,10 @@ on:
 jobs:
   generate-update:
     runs-on: ubuntu-latest
+    outputs:
+      changelog: ${{ steps.changelog.outputs.content }}
+      update-json: ${{ steps.generate-update.outputs.update-json }}
+      version: ${{ steps.version.outputs.current-version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -28,6 +32,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Generate update file
+        id: generate-update
         uses: actions/github-script@v6
         env:
           version: ${{ steps.version.outputs.current-version }}
@@ -120,3 +125,74 @@ jobs:
             }
 
             core.setOutput("update-json", JSON.stringify(update));
+
+  update-changes:
+    runs-on: ubuntu-latest
+    needs: generate-update
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: changes
+      
+      - name: Archive old update
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+
+            const update_file = "update.json";
+            if (!fs.existsSync(update_file))
+            {
+              core.log("No old updates to archive");
+              return;
+            }
+
+            const updater_contents = JSON.parse(fs.readFileSync(update_file));
+            const old_versions_file = "old_versions.json";
+            let old_versions_contents;
+            try
+            {
+              old_versions_contents = JSON.parse(fs.readFileSync(old_versions_file));
+            }
+            catch (err)
+            {
+              old_versions_contents = {
+                versions: []
+              }
+            }
+
+            let versions = old_versions_contents.versions;
+            if (versions.length > 10)
+            {
+              const folder = "archive";
+              if (!fs.existsSync(folder)) {
+                fs.mkdirSync(folder);
+              }
+
+              const file = `${folder}/${versions[versions.length - 1].name}-{versions[0].name}.json`
+              fs.writeFileSync(file, JSON.stringify(old_versions_contents))
+
+              versions = old_versions_contents.versions = [];
+              old_versions_contents.prev_page = file;
+            }
+
+            versions.unshift(updater_contents);
+            fs.writeFileSync(update_file, JSON.stringify(old_versions_contents));
+
+      - name: Modify updater file
+        uses: DamianReeves/write-file-action
+        with:
+          path: update.json
+          contents: ${{ needs.generate-update.outputs.update-json }}
+          write-mode: overwrite
+      
+      - name: Commit changes
+        env:
+          VERSION: ${{ needs.generate-update.outputs.version }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "New version: $VERSION"
+          git push
