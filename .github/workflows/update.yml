@@ -83,7 +83,7 @@ jobs:
                 core.info(`No sig file with name ${sigName}`)
                 continue;
               }
-              const sigResponse = await github.rest.repos.getReleaseAsset({
+              const sigResponse = await github.request("GET /repos/{owner}/{repo}/releases/assets/{asset_id}", {
                 headers: {
                   Accept: "application/octet-stream",
                 },
@@ -91,6 +91,14 @@ jobs:
                 repo: context.repo.repo,
                 asset_id: sigAsset.id,
               });
+              //const sigResponse = await github.rest.repos.getReleaseAsset({
+              //  headers: {
+              //    Accept: "application/octet-stream",
+              //  },
+              //  owner: context.repo.owner,
+              //  repo: context.repo.repo,
+              //  asset_id: sigAsset.id,
+              //});
               core.info(`Sig response: ${JSON.stringify(sigResponse)}`);
 
               const sig = JSON.stringify(sigResponse.data);
