@@ -83,7 +83,7 @@ jobs:
                 core.info(`No sig file with name {sigName}`)
                 continue;
               }
-              const sigResponse = await githuboctokit.rest.repos.getReleaseAsset({
+              const sigResponse = await github.rest.repos.getReleaseAsset({
                 headers: {
                   Accept: "application/octet-stream",
                 },
