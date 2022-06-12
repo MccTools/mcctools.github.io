@@ -103,7 +103,7 @@ jobs:
               //});
               core.info(`Sig response: ${JSON.stringify(sigResponse)}`);
 
-              const sig = decoder.decoder(sigResponse.data);
+              const sig = decoder.decode(sigResponse.data);
               core.info(`Sig: ${sig}`);
 
               let platform = {
