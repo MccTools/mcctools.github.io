@@ -118,7 +118,7 @@ jobs:
         with:
           script: |
             const { releaseId, version, changelog } = process.env;
-
+            
             let response = await github.rest.repos.listReleaseAssets({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -157,7 +157,7 @@ jobs:
               const sig = await github.request(sig_asset.browser_download_url);
 
               let platform = {
-                signature: sig
+                signature: sig,
                 url: asset.browser_download_url
               };
 
@@ -171,7 +171,7 @@ jobs:
                 }
                 else
                 {
-                  update.platforms["darwin-intel"] = platform
+                  update.platforms["darwin-intel"] = platform;
                 }
               }
               else if (asset.name.endsWith(".msi"))
