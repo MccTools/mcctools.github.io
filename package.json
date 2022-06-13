@@ -1,6 +1,6 @@
 {
 	"name": "mcctools.github.io",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"scripts": {
 		"dev-tauri": "cross-env MY_MODE=tauri npm run tauri dev",
 		"build-tauri": "cross-env MY_MODE=tauri npm run tauri build",
