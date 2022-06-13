@@ -8,8 +8,39 @@ on:
   workflow_dispatch:
 
 jobs:
+  get-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      changelog: ${{ steps.changelog.outputs.content }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v23
+        with:
+          files: |
+            changelog.md
+      
+      - name: Ensure changelog updated
+        if: steps.changed-files.outputs.any_changed == "false"
+        uses: actions/github-script@v6
+        with:
+          script: |
+            core.setFailed("changelog.md has not been updated");
+      
+      - name: Read changelog
+        id: changelog
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./changelog.md
+
   build-ghpages:
     runs-on: ubuntu-latest
+    needs: get-changes
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -39,18 +70,13 @@ jobs:
       matrix:
         platform: [macos-latest, ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.platform }}
+    needs: get-changes
     outputs:
       releaseId: ${{ steps.tauri.outputs.releaseId }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
-      - name: Read changelog
-        id: changelog
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: ./changelog.md
       
       - name: Node.js setup
         uses: actions/setup-node@v1
@@ -85,15 +111,11 @@ jobs:
         with:
           tagName: v__VERSION__ # tauri-action replaces \_\_VERSION\_\_ with the app version
           releaseName: 'v__VERSION__'
-          releaseBody: '${{ steps.changelog.outputs.content }}'
+          releaseBody: '${{ needs.get-changes.outputs.changelog }}'
           releaseDraft: true
           prerelease: false
           tauriScript: "npm run"
 
-      #- name: Tag commit
-        #uses: rickstaa/action-create-tag@v1
-        #with:
-          #tag: "v${{ steps.version.outputs.current-version }}"
   publish:
     needs: build-tauri
     runs-on: ubuntu-latest
