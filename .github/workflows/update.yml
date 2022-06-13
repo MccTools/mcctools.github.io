@@ -8,7 +8,6 @@ jobs:
   generate-update:
     runs-on: ubuntu-latest
     outputs:
-      changelog: ${{ steps.changelog.outputs.content }}
       update-json: ${{ steps.generate-update.outputs.update-json }}
       version: ${{ steps.version.outputs.current-version }}
     steps:

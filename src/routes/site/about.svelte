@@ -1,16 +1,3 @@
-<script context="module">
-	import { browser, dev } from '$app/env';
-	import { site } from '$lib/globals';
-
-	// we don't need any JS on this page, though we'll load
-	// it in dev so that we get hot module replacement...
-	export const hydrate = dev;
-
-	// ...but if the client-side router is already loaded
-	// (i.e. we came here from elsewhere in the app), use it
-	export const router = browser;
-</script>
-
 <svelte:head>
 	<title>About</title>
 	<meta name="description" content="About this app" />
@@ -19,23 +6,10 @@
 <div class="content">
 	<h1>About this app</h1>
 
-	<p>
-		This is a <a href="https://kit.svelte.dev">SvelteKit</a> app. You can make your own by typing the
-		following into your command line and following the prompts:
-	</p>
-
-	<pre>npm init svelte</pre>
-
-	<p>
-		The page you're looking at is purely static HTML, with no client-side interactivity needed.
-		Because of that, we don't need to load any JavaScript. Try viewing the page's source, or opening
-		the devtools network panel and reloading.
-	</p>
-
-	<p>
-		The <a href="{site}/todos">TODOs</a> page illustrates SvelteKit's data loading and form handling. Try using
-		it with JavaScript disabled!
-	</p>
+	<p>A collection of GUI tools to ease the development of MC datapacks and resource packs.</p>
+	<p>These tools are available both as a web app at <a href="https://mcctools.github.io/">mcctools.github.io</a>,
+		and as a dedicated desktop app available from the <a href="https://github.com/MccTools/mcctools.github.io/releases">github releases</a>.</p>
+	<p>The desktop app is more fully featured than the web app, thanks to <a href="https://tauri.studio/">Tauri</a> making it possible to interface more natively with the desktop environment.</p>
 </div>
 
 <style>
