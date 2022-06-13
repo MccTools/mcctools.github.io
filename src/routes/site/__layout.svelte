@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Header from '$lib/header/Header.svelte';
 	import '$root/app.css';
+	import { dev, mode } from '$app/env';
 </script>
 
 <script lang="ts" context="module">
@@ -26,9 +27,11 @@
 	<slot />
 </main>
 
-<footer>
-	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-</footer>
+{#if dev}
+	<footer>
+		<p>Running {mode === "tauri" ? "in Tauri" : "on Github Pages"}</p>
+	</footer>
+{/if}
 
 <style>
 	main {
@@ -48,10 +51,6 @@
 		justify-content: center;
 		align-items: center;
 		padding: 40px;
-	}
-
-	footer a {
-		font-weight: bold;
 	}
 
 	@media (min-width: 480px) {

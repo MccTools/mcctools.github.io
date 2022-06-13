@@ -1,1 +1,1 @@
-Setup initial proof-of-concept
+Begin converting the pages to pages for the actual app
