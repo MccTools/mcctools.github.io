@@ -178,7 +178,7 @@ jobs:
             }
 
             versions.unshift(updater_contents);
-            fs.writeFileSync(update_file, JSON.stringify(old_versions_contents));
+            fs.writeFileSync(old_versions_file, JSON.stringify(old_versions_contents));
 
       - name: Modify updater file
         uses: DamianReeves/write-file-action@v1.0
