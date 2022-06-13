@@ -1,34 +1,30 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-ecb54fb9.js",
+    "file": "start-0c1bcbfb.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
-      "_index-e60dbeb7.js",
-      "_index-003b657e.js",
-      "_singletons-d1fb5791.js"
+      "_index-26eb6964.js"
     ],
     "dynamicImports": [
       "src/routes/site/__layout.svelte",
       ".svelte-kit/runtime/components/error.svelte",
       "src/routes/site/about.svelte",
       "src/routes/site/index.svelte",
-      "src/routes/site/todos/index.svelte",
       "src/routes/site/versions.svelte"
     ]
   },
   "src/routes/site/__layout.svelte": {
-    "file": "pages/__layout.svelte-4405f436.js",
+    "file": "pages/__layout.svelte-ab74cc78.js",
     "src": "src/routes/site/__layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index-e60dbeb7.js",
-      "_globals-2f12a2b1.js",
-      "_stores-78d857b4.js"
+      "_index-26eb6964.js",
+      "_stores-2c03c8ad.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-0b71e7a2.css"
+      "assets/pages/__layout.svelte-db160219.css"
     ],
     "assets": [
       "assets/svelte-logo-87df40b8.svg",
@@ -42,91 +38,58 @@
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
-    "file": "error.svelte-3a673eed.js",
+    "file": "error.svelte-abed728d.js",
     "src": ".svelte-kit/runtime/components/error.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index-e60dbeb7.js"
+      "_index-26eb6964.js"
     ]
   },
   "src/routes/site/about.svelte": {
-    "file": "pages/about.svelte-84e84153.js",
+    "file": "pages/about.svelte-fb3e597c.js",
     "src": "src/routes/site/about.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index-e60dbeb7.js",
-      "_globals-2f12a2b1.js",
-      "_env-9973531c.js"
+      "_index-26eb6964.js"
     ],
     "css": [
       "assets/pages/about.svelte-0206ef47.css"
     ]
   },
   "src/routes/site/index.svelte": {
-    "file": "pages/index.svelte-089d1c6e.js",
+    "file": "pages/index.svelte-e969dbbc.js",
     "src": "src/routes/site/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index-e60dbeb7.js",
-      "_index-003b657e.js",
-      "_env-9973531c.js"
+      "_index-26eb6964.js"
     ],
     "css": [
-      "assets/pages/index.svelte-965fe0f1.css"
-    ]
-  },
-  "src/routes/site/todos/index.svelte": {
-    "file": "pages/todos/index.svelte-f15028d2.js",
-    "src": "src/routes/site/todos/index.svelte",
-    "isEntry": true,
-    "isDynamicEntry": true,
-    "imports": [
-      "_index-e60dbeb7.js",
-      "_singletons-d1fb5791.js",
-      "_globals-2f12a2b1.js"
-    ],
-    "css": [
-      "assets/pages/todos/index.svelte-116a62da.css"
+      "assets/pages/index.svelte-9e651d2a.css"
     ]
   },
   "src/routes/site/versions.svelte": {
-    "file": "pages/versions.svelte-cb847e83.js",
+    "file": "pages/versions.svelte-918810a9.js",
     "src": "src/routes/site/versions.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index-e60dbeb7.js",
-      "_stores-78d857b4.js"
+      "_index-26eb6964.js",
+      "_stores-2c03c8ad.js"
     ],
     "css": [
       "assets/pages/versions.svelte-7bdd993d.css"
     ]
   },
-  "_index-e60dbeb7.js": {
-    "file": "chunks/index-e60dbeb7.js"
+  "_index-26eb6964.js": {
+    "file": "chunks/index-26eb6964.js"
   },
-  "_index-003b657e.js": {
-    "file": "chunks/index-003b657e.js",
+  "_stores-2c03c8ad.js": {
+    "file": "chunks/stores-2c03c8ad.js",
     "imports": [
-      "_index-e60dbeb7.js"
+      "_index-26eb6964.js"
     ]
-  },
-  "_singletons-d1fb5791.js": {
-    "file": "chunks/singletons-d1fb5791.js"
-  },
-  "_globals-2f12a2b1.js": {
-    "file": "chunks/globals-2f12a2b1.js"
-  },
-  "_stores-78d857b4.js": {
-    "file": "chunks/stores-78d857b4.js",
-    "imports": [
-      "_index-e60dbeb7.js"
-    ]
-  },
-  "_env-9973531c.js": {
-    "file": "chunks/env-9973531c.js"
   }
 }
