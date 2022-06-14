@@ -33,10 +33,11 @@
 
 	<div class="corner">
 		<a href="https://github.com/MccTools/mcctools.github.io/">
+			<!-- srcset="/gh-mark/GitHub-Mark-Light-32px.png,
+						/gh-mark/Github-Mark-Light-64px.png 2x" -->
 			<img
-				srcset="gh-mark/GitHub-Mark-Light-32px.png,
-						gh-mark/GitHub-Mark-Light-64px.png 2x"
-				src="gh-mark/GitHub-Mark-Light-32px.png"
+				
+				src="/gh-mark/GitHub-Mark-Light-32px.png"
 				alt="repository"
 			/>
 		</a>
