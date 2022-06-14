@@ -1,15 +1,9 @@
-<script lang="ts">
-	import Header from '$lib/header/Header.svelte';
-	import '$root/app.css';
-	import { dev, mode } from '$app/env';
-</script>
-
 <script lang="ts" context="module">
 	import { site } from '$lib/globals';
 	import { CompleteVersions } from '$lib/mcmeta/summary';
 	import type { Load } from './__types/__layout';
 
-	export const load: Load = async ({fetch}) => {
+	export const load: Load = async ({ fetch }) => {
 		const versionsResponse = await fetch(`${site}/version_list.json`);
 		const versions = CompleteVersions(await versionsResponse.json());
 
@@ -18,44 +12,58 @@
 				versions
 			}
 		};
-	}
+	};
 </script>
 
-<Header />
+<script lang="ts">
+	import Header from '$lib/header/Header.svelte';
+	import '$root/app.css';
+	import { dev, isGhPages } from '$lib/globals';
+	import Panel from '$lib/Panel.svelte';
+</script>
 
-<main>
-	<slot />
-</main>
+<div class="site panel-primary">
+	<Header />
 
-{#if dev}
-	<footer>
-		<p>Running {mode === "tauri" ? "in Tauri" : "on Github Pages"}</p>
-	</footer>
-{/if}
+	<main>
+		<slot />
+	</main>
+	
+	{#if dev || isGhPages}
+		<Panel border={false} type="secondary">
+			<footer>
+				{#if isGhPages}
+					<p>
+						Check out the dedicated
+						<a href="https://github.com/MccTools/mcctools.github.io/releases" target="_blank">desktop app</a>!
+					</p>
+				{/if}
+				{#if dev}
+					<p class="dev-msg">Running {isGhPages ? 'on Github Pages' : 'in Tauri'}</p>
+				{/if}
+			</footer>
+		</Panel>
+	{/if}
+</div>
 
 <style>
+	.site {
+		min-height: 100vh;
+		display: grid;
+		grid-template-rows: auto 1fr auto;
+	}
+
 	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 1024px;
-		margin: 0 auto;
-		box-sizing: border-box;
+		padding: 1em;
 	}
 
 	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 40px;
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: 1em;
 	}
 
-	@media (min-width: 480px) {
-		footer {
-			padding: 40px 0;
-		}
+	.dev-msg {
+		grid-column: -1;
 	}
 </style>

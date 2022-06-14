@@ -15,8 +15,10 @@
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
 		</svg>
-		<ul>
-			<li class:active={$page.url.pathname === `${site}/`}><a sveltekit:prefetch href="{site}/">Home</a></li>
+		<ul class="panel-secondary">
+			<li class:active={$page.url.pathname === `${site}/` || $page.url.pathname === site}>
+				<a sveltekit:prefetch href="{site}/">Home</a>
+			</li>
 			<li class:active={$page.url.pathname === `${site}/about`}>
 				<a sveltekit:prefetch href="{site}/about">About</a>
 			</li>
@@ -30,7 +32,14 @@
 	</nav>
 
 	<div class="corner">
-		<!-- TODO put something else here? github link? -->
+		<a href="https://github.com/MccTools/mcctools.github.io/">
+			<img
+				srcset="gh-mark/GitHub-Mark-Light-32px.png,
+						gh-mark/GitHub-Mark-Light-64px.png 2x"
+				src="gh-mark/GitHub-Mark-Light-32px.png"
+				alt="repository"
+			/>
+		</a>
 	</div>
 </header>
 
@@ -62,7 +71,7 @@
 	nav {
 		display: flex;
 		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
+		--background: var(--secondary-bg);
 	}
 
 	svg {
@@ -102,7 +111,7 @@
 		top: 0;
 		left: calc(50% - var(--size));
 		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--accent-color);
+		border-top: var(--size) solid var(--standard-border);
 	}
 
 	nav a {
@@ -120,6 +129,6 @@
 	}
 
 	a:hover {
-		color: var(--accent-color);
+		color: var(--standard-border);
 	}
 </style>

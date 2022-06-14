@@ -1,1 +1,2 @@
-Begin converting the pages to pages for the actual app
+- Apply a specialised dark theme. Light theme will come later.
+- Add temporary notification on the home page about how the app/site is in development
