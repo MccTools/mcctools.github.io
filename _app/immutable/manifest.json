@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-0c1bcbfb.js",
+    "file": "start-163c836d.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -15,26 +15,20 @@
     ]
   },
   "src/routes/site/__layout.svelte": {
-    "file": "pages/__layout.svelte-ab74cc78.js",
+    "file": "pages/__layout.svelte-056dea85.js",
     "src": "src/routes/site/__layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-26eb6964.js",
+      "_globals-29db5fad.js",
       "_stores-2c03c8ad.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-db160219.css"
+      "assets/pages/__layout.svelte-5a49e05c.css"
     ],
     "assets": [
-      "assets/svelte-logo-87df40b8.svg",
-      "assets/fira-mono-cyrillic-ext-400-normal-3df7909e.woff2",
-      "assets/fira-mono-all-400-normal-1e3b098c.woff",
-      "assets/fira-mono-cyrillic-400-normal-c7d433fd.woff2",
-      "assets/fira-mono-greek-ext-400-normal-9e2fe623.woff2",
-      "assets/fira-mono-greek-400-normal-a8be01ce.woff2",
-      "assets/fira-mono-latin-ext-400-normal-6bfabd30.woff2",
-      "assets/fira-mono-latin-400-normal-e43b3538.woff2"
+      "assets/svelte-logo-87df40b8.svg"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
@@ -59,15 +53,16 @@
     ]
   },
   "src/routes/site/index.svelte": {
-    "file": "pages/index.svelte-e969dbbc.js",
+    "file": "pages/index.svelte-1dfee6bb.js",
     "src": "src/routes/site/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index-26eb6964.js"
+      "_index-26eb6964.js",
+      "_globals-29db5fad.js"
     ],
     "css": [
-      "assets/pages/index.svelte-9e651d2a.css"
+      "assets/pages/index.svelte-0499a336.css"
     ]
   },
   "src/routes/site/versions.svelte": {
@@ -85,6 +80,9 @@
   },
   "_index-26eb6964.js": {
     "file": "chunks/index-26eb6964.js"
+  },
+  "_globals-29db5fad.js": {
+    "file": "chunks/globals-29db5fad.js"
   },
   "_stores-2c03c8ad.js": {
     "file": "chunks/stores-2c03c8ad.js",
