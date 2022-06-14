@@ -36,8 +36,8 @@ const config = {
 		vite: {
 			mode: process.env.MY_MODE,
 			server: {
-				port: 3000,
-				strictPort: true,
+				port: isGhPages ? 3001 : 3000,
+				strictPort: !isGhPages,
 			},
 			envPrefix: ["VITE_","TAURI_"],
 		},
