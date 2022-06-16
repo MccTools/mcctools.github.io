@@ -15,7 +15,8 @@
 	.border {
         border-color: var(--standard-border);
         border-radius: 0.5em;
-        border-width: 0.4em;
+        border-width: 0.2em;
         border-style: solid;
+		box-shadow: 0px 0px 1em hsl(0, 0%, 10%);
 	}
 </style>

@@ -1,27 +1,30 @@
 @import '$root/reset.css';
 
 :root {
-	--green-ryb: hsla(95, 45%, 44%, 1);
+	--cyan-process: hsla(196, 100%, 46%, 1);
+	--flame: hsla(15, 86%, 51%, 1);
+	--green-pigment: hsla(146, 80%, 37%, 1);
+	--deep-champagne: hsla(38, 95%, 78%, 1);
+	--eerie-black: hsla(0, 0%, 15%, 1);
 	--forest-green-traditional: hsla(121, 84%, 13%, 1);
-	--xiketic: hsla(305, 73%, 6%, 1);
-	--safety-orange: hsla(28, 99%, 49%, 1);
-	--cyan-process: hsla(198, 78%, 64%, 1);
-
-	--primary-bg: var(--xiketic);
+	
+	--primary-bg: var(--eerie-black);
 	--primary-text: white;
 	--primary-link: hsl(214, 70%, 62%);
 	--primary-link-visited: hsl(266, 70%, 70%);
 
-	--secondary-bg: var(--green-ryb);
-	--secondary-text: black;
+	/* --secondary-bg:hsl(146, 90%, 28%); */
+	--secondary-bg: hsl(146, 79%, 26%);
+	--secondary-text: hsla(0, 0%, 100%, 0.9);
 
 	--standard-border: var(--forest-green-traditional);
 
-	--warning-border: var(--safety-orange);
+	--warning-border: var(--flame);
 
 	--info-border: var(--cyan-process);
 	
 	font-family: sans-serif;
+	color-scheme: dark;
 }
 
 .panel-primary {

@@ -2,28 +2,22 @@
 	import { page } from '$app/stores';
 	import { site } from '$lib/globals';
 	import logo from './svelte-logo.svg';
+	import VersionSelector from './VersionSelector.svelte';
 </script>
 
 <header>
-	<div class="corner">
-		<a href="https://kit.svelte.dev">
-			<img src={logo} alt="SvelteKit" />
-		</a>
-	</div>
-
 	<nav>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
-		</svg>
+		<div class="corner panel-secondary">
+			<a href="https://kit.svelte.dev">
+				<img src={logo} alt="SvelteKit" />
+			</a>
+		</div>
 		<ul class="panel-secondary">
 			<li class:active={$page.url.pathname === `${site}/` || $page.url.pathname === site}>
 				<a sveltekit:prefetch href="{site}/">Home</a>
 			</li>
 			<li class:active={$page.url.pathname === `${site}/about`}>
 				<a sveltekit:prefetch href="{site}/about">About</a>
-			</li>
-			<li class:active={$page.url.pathname === `${site}/versions`}>
-				<a sveltekit:prefetch href="{site}/versions">Versions</a>
 			</li>
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
@@ -32,22 +26,20 @@
 	</nav>
 
 	<div class="corner">
-		<a href="https://github.com/MccTools/mcctools.github.io/">
+		<a href="https://github.com/MccTools/mcctools.github.io/" target="_blank">
 			<!-- srcset="/gh-mark/GitHub-Mark-Light-32px.png,
-						/gh-mark/Github-Mark-Light-64px.png 2x" -->
-			<img
-				
-				src="/gh-mark/GitHub-Mark-Light-32px.png"
-				alt="repository"
-			/>
+					/gh-mark/Github-Mark-Light-64px.png 2x" -->
+			<img src="/gh-mark/GitHub-Mark-Light-32px.png" alt="repository" />
 		</a>
 	</div>
 </header>
 
 <style>
 	header {
-		display: flex;
-		justify-content: space-between;
+		display: grid;
+		grid-template-columns: 1fr auto auto;
+		justify-items: left;
+		align-items: center;
 	}
 
 	.corner {
@@ -56,23 +48,58 @@
 	}
 
 	.corner a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
 		width: 100%;
 		height: 100%;
+		display: grid;
+		align-items: center;
+		justify-items: center;
 	}
 
 	.corner img {
 		width: 2em;
 		height: 2em;
-		object-fit: contain;
 	}
 
 	nav {
-		display: flex;
-		justify-content: center;
-		--background: var(--secondary-bg);
+		display: grid;
+		grid-auto-columns: auto;
+		grid-auto-flow: column;
+		align-items: center;
+	}
+
+	nav ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-auto-flow: column;
+		height: 100%;
+		align-items: center;
+		gap: 1em;
+	}
+
+	nav a {
+		position: relative;
+		letter-spacing: 0.05em;
+		text-decoration: none;
+		color: var(--secondary-text);
+	}
+
+	nav a:hover {
+		color: var(--standard-border);
+	}
+	
+	.active a::after {
+		content: '';
+		position: absolute;
+		--extend: 0.2em;
+		width: calc(100% + var(--extend) * 2);
+		height: 0.2em;
+		border-radius: 100vw;
+		background-color: var(--standard-border);
+		bottom: -0.2em;
+		left: calc(var(--extend) * -1);
+		transform: translateY(100%);
 	}
 
 	svg {
@@ -82,54 +109,6 @@
 	}
 
 	path {
-		fill: var(--background);
-	}
-
-	ul {
-		position: relative;
-		padding: 0;
-		margin: 0;
-		height: 3em;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		list-style: none;
-		background: var(--background);
-		background-size: contain;
-	}
-
-	li {
-		position: relative;
-		height: 100%;
-	}
-
-	li.active::before {
-		--size: 6px;
-		content: '';
-		width: 0;
-		height: 0;
-		position: absolute;
-		top: 0;
-		left: calc(50% - var(--size));
-		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--standard-border);
-	}
-
-	nav a {
-		display: flex;
-		height: 100%;
-		align-items: center;
-		padding: 0 1em;
-		color: var(--heading-color);
-		font-weight: 700;
-		font-size: 0.8rem;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		text-decoration: none;
-		transition: color 0.2s linear;
-	}
-
-	a:hover {
-		color: var(--standard-border);
+		fill: var(--secondary-bg);
 	}
 </style>

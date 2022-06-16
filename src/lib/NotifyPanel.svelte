@@ -12,7 +12,6 @@
 <style>
 	div {
 		padding: 1em;
-        border-color: var(--standard-border);
         border-radius: 0.5em;
         border-width: 0.4em;
         border-style: solid;
