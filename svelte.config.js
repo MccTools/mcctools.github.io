@@ -30,7 +30,7 @@ const config = {
 		
 		prerender: {
 			default: true,
-			entries: ["*"]
+			entries: ["*", "/"]
 		},
 
 		vite: {

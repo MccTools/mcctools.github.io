@@ -14,7 +14,7 @@
 		"format": "prettier --write --plugin-search-dir=. .",
 		"tauri": "tauri",
 		"svelte-kit": "svelte-kit",
-		"preview": "svelte-kit preview"
+		"preview": "cross-env MY_MODE=ghpages npm run svelte-kit preview"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^1.0.0-next.34",

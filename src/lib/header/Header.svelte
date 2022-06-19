@@ -13,11 +13,11 @@
 			</a>
 		</div>
 		<ul class="panel-secondary">
-			<li class:active={$page.url.pathname === `${site}/` || $page.url.pathname === site}>
-				<a sveltekit:prefetch href="{site}/">Home</a>
+			<li class:active={$page.routeId === '[...version]' || $page.routeId === `${site.slice(1)}/[...version]`}>
+				<a sveltekit:prefetch href="{site}/{$page.stuff.versionPath}">Home</a>
 			</li>
-			<li class:active={$page.url.pathname === `${site}/about`}>
-				<a sveltekit:prefetch href="{site}/about">About</a>
+			<li class:active={$page.routeId === '[...version]/about' || $page.routeId === `${site.slice(1)}/[...version]/about`}>
+				<a sveltekit:prefetch href="{site}/{$page.stuff.versionPath}about">About</a>
 			</li>
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
@@ -25,6 +25,7 @@
 		</svg>
 	</nav>
 
+	<VersionSelector/>
 	<div class="corner">
 		<a href="https://github.com/MccTools/mcctools.github.io/" target="_blank">
 			<!-- srcset="/gh-mark/GitHub-Mark-Light-32px.png,

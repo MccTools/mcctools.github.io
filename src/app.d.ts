@@ -13,6 +13,8 @@ declare namespace App {
 
 	interface Stuff {
 		versions: import("$lib/mcmeta/summary").Version[]
+		version: import("$lib/mcmeta/summary").Version,
+		versionPath: string,
 	}
 }
 

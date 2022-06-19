@@ -20,6 +20,7 @@
 	import '$root/app.css';
 	import { dev, isGhPages } from '$lib/globals';
 	import Panel from '$lib/Panel.svelte';
+	import { page } from '$app/stores';
 </script>
 
 <div class="site panel-primary">
@@ -28,15 +29,19 @@
 	<main>
 		<slot />
 	</main>
-	
+
 	{#if dev || isGhPages}
 		<Panel border={false} type="secondary">
 			<footer>
 				{#if isGhPages}
 					<p>
 						Check out the dedicated
-						<a href="https://github.com/MccTools/mcctools.github.io/releases" target="_blank">desktop app</a>!
+						<a href="https://github.com/MccTools/mcctools.github.io/releases" target="_blank"
+							>desktop app</a
+						>!
 					</p>
+				{:else}
+					<p>{$page.url}</p>
 				{/if}
 				{#if dev}
 					<p class="dev-msg">Running {isGhPages ? 'on Github Pages' : 'in Tauri'}</p>
